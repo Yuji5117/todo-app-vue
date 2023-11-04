@@ -6,7 +6,16 @@ type TaskProps = {
   task: Task;
 };
 
+type TaskEmits = {
+  (e: "deleteTask", id: string): void;
+};
+
 const props = defineProps<TaskProps>();
+const emit = defineEmits<TaskEmits>();
+
+const onDeleteClick = () => {
+  emit("deleteTask", props.task.id);
+};
 </script>
 
 <template>
@@ -21,7 +30,7 @@ const props = defineProps<TaskProps>();
     </div>
     <div class="task_icons">
       <IconEdit class="task_icon" :size="20" />
-      <IconTrash class="task_icon" :size="20" />
+      <IconTrash @click="onDeleteClick" class="task_icon" :size="20" />
     </div>
   </div>
 </template>

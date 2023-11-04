@@ -15,6 +15,11 @@ const addTask = (title: string, done: boolean) => {
   console.log("id");
   tasks.push({ id, title, done });
 };
+
+const deleteTask = (id: string) => {
+  const index = tasks.findIndex((task) => task.id === id);
+  tasks.splice(index, 1);
+};
 </script>
 
 <template>
@@ -25,7 +30,7 @@ const addTask = (title: string, done: boolean) => {
       <div class="task_section">
         <ul class="task_list_container">
           <li v-for="task in tasks">
-            <TaskItem :task="task" />
+            <TaskItem @deleteTask="deleteTask" :task="task" />
           </li>
         </ul>
       </div>
