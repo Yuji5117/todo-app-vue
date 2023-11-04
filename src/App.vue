@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { Title } from "./components";
+import { Form, Title } from "./components";
+import "normalize.css";
 </script>
 
 <template>
   <div class="main">
-    <div class="container"><Title title="Get Things Done!" /></div>
+    <div class="container"><Title title="Get Things Done!" /><Form /></div>
   </div>
 </template>
 
