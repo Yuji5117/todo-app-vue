@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// const props = defineProps([""]);
+import { computed, ref } from "vue";
 
 type TaskItemEmits = {
   (e: "addTask", title: string, done: boolean): void;
@@ -9,8 +9,11 @@ const emit = defineEmits<TaskItemEmits>();
 
 const onAddItemSubmit = (event: Event) => {
   event.preventDefault();
-  emit("addTask", "test", false);
+  emit("addTask", taskName.value, false);
 };
+
+const taskName = ref("");
+const isDisabled = computed(() => taskName.value === "");
 </script>
 
 <template>
@@ -19,8 +22,11 @@ const onAddItemSubmit = (event: Event) => {
       type="text"
       class="task_input"
       placeholder="What is the task today?"
+      v-model="taskName"
     />
-    <button type="submit" class="task_add_button">Add Task</button>
+    <button :disabled="isDisabled" type="submit" class="task_add_button">
+      Add Task
+    </button>
   </form>
 </template>
 
@@ -52,5 +58,10 @@ const onAddItemSubmit = (event: Event) => {
 .task_add_button:hover {
   opacity: 0.8;
   outline: none;
+}
+
+.task_add_button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 </style>
