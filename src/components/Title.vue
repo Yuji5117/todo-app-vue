@@ -1,5 +1,9 @@
 <script setup lang="ts">
-const props = defineProps(["title"]);
+type TitleProps = {
+  title: string;
+};
+
+const props = defineProps<TitleProps>();
 </script>
 
 <template>
