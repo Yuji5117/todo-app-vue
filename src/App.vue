@@ -1,20 +1,24 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { Title } from "./components";
+</script>
 
 <template>
-  <div>test</div>
+  <div class="main">
+    <div class="container"><Title title="Get Things Done!" /></div>
+  </div>
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.main {
+  width: 500px;
+  height: 600px;
+  background-color: rgb(29, 28, 71);
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+.container {
+  width: 85%;
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 </style>
