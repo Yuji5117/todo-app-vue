@@ -122,6 +122,18 @@
   resolved "https://registry.yarnpkg.com/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.4.15.tgz#d7c6e6755c78567a951e04ab52ef0fd26de59f32"
   integrity sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==
 
+"@tabler/icons-vue@^2.40.0":
+  version "2.40.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons-vue/-/icons-vue-2.40.0.tgz#c5261b8d115648d774af880774deffc93a598954"
+  integrity sha512-nXwwCa10CKz9dxhOpxnq2QmpkPOriQZ/vvXrsAFwCC0XRow3/Jfc1E1U7D07dcWdmC2GihIeIUKEDj7EU+1mCg==
+  dependencies:
+    "@tabler/icons" "2.40.0"
+
+"@tabler/icons@2.40.0":
+  version "2.40.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-2.40.0.tgz#96cecc990a03412b88194ce3765280d2e63c1be6"
+  integrity sha512-VqKsBSX159cLFTnCzkCmGhZtSPJHNN0lM2sC4xe0HPOfPUnjiex7rDHDdut4oe4iKRecDDpwXwM9BcU6xCPlCg==
+
 "@vitejs/plugin-vue@^4.2.3":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@vitejs/plugin-vue/-/plugin-vue-4.4.0.tgz#8ae96573236cdb12de6850a6d929b5537ec85390"

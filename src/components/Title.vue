@@ -16,5 +16,6 @@ const props = defineProps(["title"]);
 .title {
   color: white;
   font-size: 2rem;
+  margin: 0px;
 }
 </style>
