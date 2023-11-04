@@ -2,21 +2,31 @@
 import { Form, Title, TaskItem } from "./components";
 import "normalize.css";
 import { Task } from "./types";
+import { reactive } from "vue";
 
-const tasks: Task[] = [
+const tasks: Task[] = reactive([
   { id: "1", title: "散歩", done: false },
   { id: "2", title: "宿題", done: false },
   { id: "3", title: "掃除", done: true },
-];
+]);
+
+const addTask = (title: string, done: boolean) => {
+  const id = tasks.length.toString();
+  console.log("id");
+  tasks.push({ id, title, done });
+};
 </script>
 
 <template>
   <div class="main">
     <div class="container">
-      <Title title="Get Things Done!" /><Form />
-      <div>
+      <Title title="Get Things Done!" />
+      <Form @addTask="addTask" />
+      <div class="task_section">
         <ul class="task_list_container">
-          <li v-for="task in tasks"><TaskItem :task="task" /></li>
+          <li v-for="task in tasks">
+            <TaskItem :task="task" />
+          </li>
         </ul>
       </div>
     </div>
@@ -40,9 +50,15 @@ const tasks: Task[] = [
   padding-bottom: 40px;
 }
 
+.task_section {
+  height: 100%;
+  overflow: scroll;
+}
+
 .task_list_container {
   display: flex;
   flex-direction: column;
   gap: 18px;
+  height: 360px;
 }
 </style>
