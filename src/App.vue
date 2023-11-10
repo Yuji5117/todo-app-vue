@@ -2,13 +2,19 @@
 import { Form, Title, TaskItem } from "./components";
 import "normalize.css";
 import { Task } from "./types";
-import { reactive } from "vue";
+import { getTasks } from "./api";
+import { onMounted, reactive } from "vue";
 
-const tasks: Task[] = reactive([
-  { id: "1", title: "散歩", done: false },
-  { id: "2", title: "宿題", done: false },
-  { id: "3", title: "掃除", done: true },
-]);
+const tasks: Task[] = reactive([]);
+
+onMounted(() => {
+  getTasks()
+    .then((res) => {
+      console.log("res", res.data);
+      return tasks.push(...res.data);
+    })
+    .catch((error) => console.error(error));
+});
 
 const addTask = (title: string, done: boolean) => {
   const id = tasks.length.toString();
