@@ -2,14 +2,14 @@
 import { computed, ref } from "vue";
 
 type TaskItemEmits = {
-  (e: "addTask", title: string, done: boolean): void;
+  (e: "addTask", title: string): void;
 };
 
 const emit = defineEmits<TaskItemEmits>();
 
 const onAddItemSubmit = (event: Event) => {
   event.preventDefault();
-  emit("addTask", taskName.value, false);
+  emit("addTask", taskName.value);
 };
 
 const taskName = ref("");

@@ -2,7 +2,7 @@
 import { Form, Title, TaskItem } from "./components";
 import "normalize.css";
 import { Task } from "./types";
-import { getTasks } from "./api";
+import { getTasks, createTask } from "./api";
 import { onMounted, reactive } from "vue";
 
 const tasks: Task[] = reactive([]);
@@ -16,10 +16,9 @@ onMounted(() => {
     .catch((error) => console.error(error));
 });
 
-const addTask = (title: string, done: boolean) => {
-  const id = tasks.length.toString();
-  console.log("id");
-  tasks.push({ id, title, done });
+const addTask = async (title: string) => {
+  const res = await createTask({ title });
+  tasks.unshift({ id: res.data, title, done: false });
 };
 
 const deleteTask = (id: string) => {

@@ -1,5 +1,5 @@
 import { apiClient } from "../libs/axios";
 
 export const getTasks = async () => {
-  return await apiClient("/tasks");
+  return await apiClient.get("/tasks");
 };
