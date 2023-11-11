@@ -10,7 +10,6 @@ const tasks: Task[] = reactive([]);
 onMounted(() => {
   getTasks()
     .then((res) => {
-      console.log("res", res.data);
       return tasks.push(...res.data);
     })
     .catch((error) => console.error(error));
