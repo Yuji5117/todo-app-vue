@@ -25,6 +25,10 @@ const changeTaskStatus = async (id: string, done: boolean) => {
   await updateTask(id, { done });
 };
 
+const updateTaskTitle = async (id: string, title: string) => {
+  await updateTask(id, { title });
+};
+
 const removeTask = async (id: string) => {
   await deleteTask(id);
   const index = tasks.findIndex((task) => task.id === id);
@@ -42,6 +46,7 @@ const removeTask = async (id: string) => {
           <li v-for="task in tasks">
             <TaskItem
               @changeTaskStatus="changeTaskStatus"
+              @updateTaskTitle="updateTaskTitle"
               @removeTask="removeTask"
               :task="task"
             />

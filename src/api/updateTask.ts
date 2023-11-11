@@ -6,5 +6,5 @@ export type UpdateTaskDTO = {
 };
 
 export const updateTask = async (id: string, data: UpdateTaskDTO) => {
-  return await apiClient.post(`/tasks/${id}`, data);
+  return await apiClient.patch(`/tasks/${id}`, data);
 };

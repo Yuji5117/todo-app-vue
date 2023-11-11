@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import { Task } from "../types";
-import { IconEdit, IconTrash } from "@tabler/icons-vue";
+import { IconEdit, IconTrash, IconDeviceFloppy } from "@tabler/icons-vue";
 
 type TaskProps = {
   task: Task;
@@ -9,17 +10,29 @@ type TaskProps = {
 type TaskEmits = {
   (e: "removeTask", id: string): void;
   (e: "changeTaskStatus", id: string, done: boolean): void;
+  (e: "updateTaskTitle", id: string, title: string): void;
 };
 
 const props = defineProps<TaskProps>();
 const emit = defineEmits<TaskEmits>();
 
-const onDeleteClick = () => {
-  emit("removeTask", props.task.id);
+const isEditMode = ref(false);
+
+const toggleEditMode = () => {
+  isEditMode.value = !isEditMode.value;
 };
 
 const onStatusChange = (event: any) => {
   emit("changeTaskStatus", props.task.id, event.target.checked);
+};
+
+const onUpdateClick = () => {
+  emit("updateTaskTitle", props.task.id, props.task.title);
+  toggleEditMode();
+};
+
+const onDeleteClick = () => {
+  emit("removeTask", props.task.id);
 };
 </script>
 
@@ -33,13 +46,36 @@ const onStatusChange = (event: any) => {
           v-model="task.done"
         />
       </div>
-      <div class="task_title">
+      <div v-if="!isEditMode" class="task_title">
         <p class="task_title_text">{{ props.task.title }}</p>
+      </div>
+      <div v-if="isEditMode" class="task_title">
+        <input
+          class="task_title_input"
+          type="text"
+          v-model="props.task.title"
+        />
       </div>
     </div>
     <div class="task_icons">
-      <IconEdit class="task_icon" :size="20" />
-      <IconTrash @click="onDeleteClick" class="task_icon" :size="20" />
+      <IconEdit
+        v-if="!isEditMode"
+        @click="toggleEditMode"
+        class="task_icon"
+        :size="20"
+      />
+      <IconTrash
+        v-if="!isEditMode"
+        @click="onDeleteClick"
+        class="task_icon"
+        :size="20"
+      />
+      <IconDeviceFloppy
+        v-if="isEditMode"
+        @click="onUpdateClick"
+        class="task_icon"
+        :size="20"
+      />
     </div>
   </div>
 </template>
@@ -68,6 +104,19 @@ const onStatusChange = (event: any) => {
 
 .task_title_text {
   color: white;
+}
+
+.task_title_input {
+  color: white;
+  border: solid 1px blueviolet;
+  background-color: rgb(29, 28, 71);
+  outline: none;
+  padding: 3px 5px;
+}
+
+.task_input::placeholder {
+  color: white;
+  opacity: 0.5;
 }
 
 .task_icons {
