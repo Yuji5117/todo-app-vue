@@ -7,14 +7,19 @@ type TaskProps = {
 };
 
 type TaskEmits = {
-  (e: "deleteTask", id: string): void;
+  (e: "removeTask", id: string): void;
+  (e: "changeTaskStatus", id: string, done: boolean): void;
 };
 
 const props = defineProps<TaskProps>();
 const emit = defineEmits<TaskEmits>();
 
 const onDeleteClick = () => {
-  emit("deleteTask", props.task.id);
+  emit("removeTask", props.task.id);
+};
+
+const onStatusChange = (event: any) => {
+  emit("changeTaskStatus", props.task.id, event.target.checked);
 };
 </script>
 
@@ -22,7 +27,11 @@ const onDeleteClick = () => {
   <div class="task_container">
     <div class="task_main">
       <div class="task_checkbox">
-        <input type="checkbox" />
+        <input
+          v-on:change="onStatusChange"
+          type="checkbox"
+          v-model="task.done"
+        />
       </div>
       <div class="task_title">
         <p class="task_title_text">{{ props.task.title }}</p>

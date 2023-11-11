@@ -2,7 +2,7 @@
 import { Form, Title, TaskItem } from "./components";
 import "normalize.css";
 import { Task } from "./types";
-import { getTasks, createTask } from "./api";
+import { getTasks, createTask, updateTask, deleteTask } from "./api";
 import { onMounted, reactive } from "vue";
 
 const tasks: Task[] = reactive([]);
@@ -21,7 +21,12 @@ const addTask = async (title: string) => {
   tasks.unshift({ id: res.data, title, done: false });
 };
 
-const deleteTask = (id: string) => {
+const changeTaskStatus = async (id: string, done: boolean) => {
+  await updateTask(id, { done });
+};
+
+const removeTask = async (id: string) => {
+  await deleteTask(id);
   const index = tasks.findIndex((task) => task.id === id);
   tasks.splice(index, 1);
 };
@@ -35,7 +40,11 @@ const deleteTask = (id: string) => {
       <div class="task_section">
         <ul class="task_list_container">
           <li v-for="task in tasks">
-            <TaskItem @deleteTask="deleteTask" :task="task" />
+            <TaskItem
+              @changeTaskStatus="changeTaskStatus"
+              @removeTask="removeTask"
+              :task="task"
+            />
           </li>
         </ul>
       </div>
